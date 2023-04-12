@@ -1,1 +1,57 @@
+Included Libraries:
+  pathlib
+Python files:
+  GenMC_Preprocess.py
+  process_VASP.py
+Input files:
+  POSCAR/CONTCAR/str (of these)
+  OUTCAR
+Output files:
+  RAW_OUTPUT
+  PP_OUTPUT 
+##################################################
+#               GenMC_Preprocess.py              # 
+##################################################
+// Include dependencies //
+from pathlib import Path
+import process_vasp pv
+// functions //
+import_vasp_raw(string: root_dir, list[strings]: species, string: input_type) 
+    loop over all directories in root_dir and look for input file of OUTCAR and input_type. If both files are present, read them and write a new entry in RAW_OUTPUT.
+    The format for the output file is...
+    
+    # {Elements included in input}
+    {number of each element (in the same order)} {name of the directory} {total energy} {lattice constants and angles}
+    {lattice vectors}
+    {atom index} {atom species} {atom spin} {atom position in direct coordinates}
+    
+    here is an example...
+    
+    # Fe Ni Cr
+    1   3   0   120 -24.98557921    3.6   3.6   3.6   1.5707963267948966  1.5707963267948966  1.5707963267948966
+    -0.0    0.0 3.6
+    -0.0    3.6  -0.0
+    -3.6  0.0 -0.0
+    0   0   3.40 0.5000000000000000  0.5000000000000000  -0.0000000000000000
+    1   1   3.40 0.5000000000000000  0.0000000000000000  0.5000000000000000
+    2   1   3.30 0.0000000000000000  0.5000000000000000  0.5000000000000000
+    3   1   3.510 0.0000000000000000  -0.0000000000000000 -0.0000000000000000
+    
+// starting GenMC_Preprocess.py //
+root_dir = ... # string: root directory for getting vasp data
+input_type = ... # string: name of type if input file (POSCAR/CONTCAR from VASP, str from ATAT)
+output_file = ... # string: output file to be used by GenMC_Fit
+species = ... # list of strings: atomic symbol for each atom that can appear in the data
+spin_tol = ... # list of floats: minimum magnitude for non-zero spin for each atom 
+import_vasp_raw(root_dir, species)
+pv.apply_spin_tol(spin_tol)
 
+##################################################
+#               GenMC_Preprocess.py              # 
+##################################################
+// Include dependencies //
+none
+// functions //
+apply_spin_tol(list[ints]: spin_tol)
+    Open RAW_OUTPUT and loop over all data, applying the spin tollarance (spin_tol) to each atoms spin
+    Write the data with the new spin values to PP_OUTPUT
