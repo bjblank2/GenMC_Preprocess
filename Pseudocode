@@ -47,7 +47,7 @@ import_vasp_raw(root_dir, species)
 pv.apply_spin_tol(spin_tol)
 
 ##################################################
-#               GenMC_Preprocess.py              # 
+#               process_vasp.py              # 
 ##################################################
 // Include dependencies //
 none
