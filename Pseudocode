@@ -55,3 +55,5 @@ none
 apply_spin_tol(list[ints]: spin_tol)
     Open RAW_OUTPUT and loop over all data, applying the spin tollarance (spin_tol) to each atoms spin
     Write the data with the new spin values to PP_OUTPUT
+// starting process_vasp.py //
+
