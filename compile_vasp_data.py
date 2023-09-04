@@ -192,6 +192,7 @@ def read_pos(outcar_lines, contcar_lines, poscar_lines, species):
     :param contcar_lines: read lines of contcar
     :param poscar_lines: read lines of poscar
     :return: energy, species and position info in seq from contcar with unrelaxed coords from poscar
+                pos_list format [species, position, spin]
     """
     # read enrg
     enrg = None
@@ -314,12 +315,22 @@ def compile_vasp(root_dir, output_dir, species, read_mag, use_spin_tol, spin_tol
                 enrg, spec_list, pos_list = read_mag_pos(outcar_lines, contcar_lines, poscar_lines, species)
                 if use_spin_tol:
                     for mag in pos_list:
-                        if spin_tol[species.index(mag[0])] == 0:
-                            mag[2] = 0
-                        elif np.abs(mag[2]) < spin_tol[species.index(mag[0])]:
-                            mag[2] = 0
+                        if len(spin_tol[species.index(mag[0])]) == 1:
+                            if spin_tol[species.index(mag[0])] == 0:
+                                mag[2] = 0
+                            elif np.abs(mag[2]) < spin_tol[species.index(mag[0])]:
+                                mag[2] = 0
+                            else:
+                                mag[2] = 1 * np.sign(mag[2])
+                        elif len(spin_tol[species.index(mag[0])]) == 2:
+                            if np.abs(mag[2]) < min(spin_tol[species.index(mag[0])]):
+                                mag[2] = 0
+                            elif np.abs(mag[2]) < max(spin_tol[species.index(mag[0])]):
+                                mag[2] = 1 * np.sign(mag[2])
+                            else:
+                                mag[2] = 2 * np.sign(mag[2])
                         else:
-                            mag[2] = 1 * np.sign(mag[2])
+                            print('Error: check the spin tolerance setting!')
             pos_list.sort(key=lambda x: species.index(x[0]))
             # start writing outputs
             print(name)

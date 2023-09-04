@@ -1,17 +1,17 @@
-root_dir: '/Users/tianyu/Desktop/Alloy/GenMC/GenMC_Preprocess/data_FeNiCr/5-33'   # the top directory of your vasp data
+root_dir: '/Users/tianyu/Desktop/Alloy/GenMC/GenMC_Preprocess/data_FeNiCr_old/5-33'   # the top directory of your vasp data
 
 do_compile_data: True
 write_data: 'data_mag_5-33'                       # path and name of your output metadata file
-species: ['Fe', 'Ni', 'Cr']                  # species and sequence
+species: ['Fe', 'Ni', 'Cr']                       # species and sequence
 read_mag: True
-use_spin_tol: True                           # choose whether to use spin tolerance
-spin_tol: [1.1, 0.2, 0.7]                    # spin tolerance here in the same sequence of species
+use_spin_tol: True                                # choose whether to use spin tolerance
+spin_tol: [[2,1], [0.4,0.2], [1.4,0.7]]           # spin tolerance here in the same sequence of species
 
 do_mag_distrib: False
-write_mag_distrib: 'mag_distrib'             # path and name of your magnetic distribution output file
+write_mag_distrib: 'mag_distrib'                  # path and name of your magnetic distribution output file
 
 do_mag_pair: False
-write_mag_pair: 'CrFe_1NN'                      # path and name of your magnetic pairs output file
+write_mag_pair: 'CrFe_1NN'                        # path and name of your magnetic pairs output file
 target: 'Cr'
 pair: 'Fe'
 clust: [[1.8, 1.8, 0.0],[-1.8, -1.8, 0.0],[-1.8, 1.8, 0.0],[1.8, -1.8, 0.0],[0.0, 1.8, 1.8],[0.0, -1.8, -1.8],
