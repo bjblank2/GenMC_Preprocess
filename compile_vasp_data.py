@@ -60,100 +60,6 @@ def read_lat(contcar_lines):
     return lat_const, lat_vec, lat_ang
 
 
-# def read_atat_pos(poscar_lines, species, lat_vec):
-#     """
-#     read species and composition from atat-formatted files
-#     :param poscar_lines: read lines of atat-formatted poscar files, i.e. no species information
-#     :param species: users-defined species sequence
-#     :param lat_vec: lattice vector
-#     :return: species and position info from atat-formatted files
-#     """
-#     pos_start = 0
-#     for i in range(len(poscar_lines)):
-#         if 'artesian' in poscar_lines[i] or 'irect' in poscar_lines[i]:
-#             pos_start = i + 1
-#     atom_sum = len(poscar_lines) - pos_start
-#     spec_list = [[]] * len(species)
-#     pos_list = [[]] * atom_sum
-#     seq = []
-#     for i in range(atom_sum):
-#         pnt = poscar_lines[pos_start + i].split()
-#         pos = []
-#         for j in range(3):
-#             pos.append(float(pnt[j]))
-#         if 'artesian' in poscar_lines[pos_start - 1]:
-#             pos = cart_to_frac(pos, lat_vec)
-#         pos = apply_pbc(pos)
-#         pos_list[i] = [pnt[3], pos]
-#         seq.append(pnt[3])
-#     pos_list.sort(key=lambda x: species.index(x[0]))
-#     spec_dict = {i: seq.count(i) for i in seq}
-#     for i in range(len(species)):
-#         for keys in spec_dict:
-#             if species[i] == keys:
-#                 spec_list[i] = [spec_dict[keys], species[i]]
-#                 break
-#             else:
-#                 spec_list[i] = [0, species[i]]
-#
-#     return spec_list, pos_list
-#
-#
-# def read_pos(contcar_lines, species, lat_vec):
-#     """
-#     read species and composition from contcar/poscar file
-#     :param species: users-defined species sequence
-#     :param contcar_lines: read lines of contcar
-#     :param lat_vec: lattice vector
-#     :return: species and position info from contcar/poscar
-#     """
-#     spec = contcar_lines[5].split()
-#     comp = contcar_lines[6].split()
-#     atom_sum = int(np.sum(np.array(comp, dtype=np.float64)))
-#     spec_list = [[]] * len(species)
-#     pos_list = [[]] * atom_sum
-#     seq = []
-#     for i in range(len(spec)):
-#         for j in range(int(comp[i])):
-#             seq.append(spec[i])
-#     for i in range(atom_sum):
-#         pnt = contcar_lines[8 + i].split()
-#         pos = []
-#         for j in range(3):
-#             pos.append(float(pnt[j]))
-#         if 'artesian' in contcar_lines[7]:
-#             pos = cart_to_frac(pos, lat_vec)
-#         pos = apply_pbc(pos)
-#         pos_list[i] = [seq[i], pos]
-#     pos_list.sort(key=lambda x: species.index(x[0]))
-#     spec_dict = {i: seq.count(i) for i in seq}
-#     for i in range(len(species)):
-#         for keys in spec_dict:
-#             if species[i] == keys:  # if element from user-specified species is in contcar
-#                 spec_list[i] = [spec_dict[keys], species[i]]
-#                 break
-#             else:                   # if element from user-specified species is not in contcar
-#                 spec_list[i] = [0, species[i]]
-#
-#     return spec_list, pos_list
-
-
-# def read_contcar_seq(contcar_lines):
-#     """
-#     read vasp output species sequence
-#     :param contcar_lines: read lines of contcar
-#     :return: atomic sequence in contcar and outcar for one-to-one correspondence
-#     """
-#     spec = contcar_lines[5].split()
-#     comp = contcar_lines[6].split()
-#     seq = []
-#     for i in range(len(spec)):
-#         for j in range(int(comp[i])):
-#             seq.append(spec[i])
-#
-#     return seq
-
-
 def read_poscar_coords(poscar_lines):
     """
     read species and composition from atat-formatted files
@@ -356,3 +262,99 @@ def compile_vasp(root_dir, output_dir, species, read_mag, use_spin_tol, spin_tol
                               + str(pos_list[i][1][1]) + "\t" + str(pos_list[i][1][2]) + "\n"
                 output.write(output_line)
     output.close()
+
+
+
+# Stand in code for ATAT input files
+# def read_atat_pos(poscar_lines, species, lat_vec):
+#     """
+#     read species and composition from atat-formatted files
+#     :param poscar_lines: read lines of atat-formatted poscar files, i.e. no species information
+#     :param species: users-defined species sequence
+#     :param lat_vec: lattice vector
+#     :return: species and position info from atat-formatted files
+#     """
+#     pos_start = 0
+#     for i in range(len(poscar_lines)):
+#         if 'artesian' in poscar_lines[i] or 'irect' in poscar_lines[i]:
+#             pos_start = i + 1
+#     atom_sum = len(poscar_lines) - pos_start
+#     spec_list = [[]] * len(species)
+#     pos_list = [[]] * atom_sum
+#     seq = []
+#     for i in range(atom_sum):
+#         pnt = poscar_lines[pos_start + i].split()
+#         pos = []
+#         for j in range(3):
+#             pos.append(float(pnt[j]))
+#         if 'artesian' in poscar_lines[pos_start - 1]:
+#             pos = cart_to_frac(pos, lat_vec)
+#         pos = apply_pbc(pos)
+#         pos_list[i] = [pnt[3], pos]
+#         seq.append(pnt[3])
+#     pos_list.sort(key=lambda x: species.index(x[0]))
+#     spec_dict = {i: seq.count(i) for i in seq}
+#     for i in range(len(species)):
+#         for keys in spec_dict:
+#             if species[i] == keys:
+#                 spec_list[i] = [spec_dict[keys], species[i]]
+#                 break
+#             else:
+#                 spec_list[i] = [0, species[i]]
+#
+#     return spec_list, pos_list
+#
+#
+# def read_pos(contcar_lines, species, lat_vec):
+#     """
+#     read species and composition from contcar/poscar file
+#     :param species: users-defined species sequence
+#     :param contcar_lines: read lines of contcar
+#     :param lat_vec: lattice vector
+#     :return: species and position info from contcar/poscar
+#     """
+#     spec = contcar_lines[5].split()
+#     comp = contcar_lines[6].split()
+#     atom_sum = int(np.sum(np.array(comp, dtype=np.float64)))
+#     spec_list = [[]] * len(species)
+#     pos_list = [[]] * atom_sum
+#     seq = []
+#     for i in range(len(spec)):
+#         for j in range(int(comp[i])):
+#             seq.append(spec[i])
+#     for i in range(atom_sum):
+#         pnt = contcar_lines[8 + i].split()
+#         pos = []
+#         for j in range(3):
+#             pos.append(float(pnt[j]))
+#         if 'artesian' in contcar_lines[7]:
+#             pos = cart_to_frac(pos, lat_vec)
+#         pos = apply_pbc(pos)
+#         pos_list[i] = [seq[i], pos]
+#     pos_list.sort(key=lambda x: species.index(x[0]))
+#     spec_dict = {i: seq.count(i) for i in seq}
+#     for i in range(len(species)):
+#         for keys in spec_dict:
+#             if species[i] == keys:  # if element from user-specified species is in contcar
+#                 spec_list[i] = [spec_dict[keys], species[i]]
+#                 break
+#             else:                   # if element from user-specified species is not in contcar
+#                 spec_list[i] = [0, species[i]]
+#
+#     return spec_list, pos_list
+
+
+# def read_contcar_seq(contcar_lines):
+#     """
+#     read vasp output species sequence
+#     :param contcar_lines: read lines of contcar
+#     :return: atomic sequence in contcar and outcar for one-to-one correspondence
+#     """
+#     spec = contcar_lines[5].split()
+#     comp = contcar_lines[6].split()
+#     seq = []
+#     for i in range(len(spec)):
+#         for j in range(int(comp[i])):
+#             seq.append(spec[i])
+#
+#     return seq
