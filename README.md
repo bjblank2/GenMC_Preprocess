@@ -1,6 +1,6 @@
 # GenMC_Preprocess
 
-GenMC_Preprocess is a component of the Generalized Monte Carlo Toolkit for Magnetic Alloys (GenMC-MA). It is a Python-based preprocessing tool that facilitates the construction of lattice models by collating, verifying, and formatting data generated from DFT (Density Functional Theory) simulations. The processed data can then be used to parameterize models for simulating magnetic and alloy configurations.
+GenMC_Preprocess is a component of the Generalized Monte Carlo Toolkit for Magnetic Alloys (GenMC-MA). It is a Python-based preprocessing tool that facilitates the construction of lattice models by collating, verifying, and formatting data generated from DFT (Density Functional Theory) simulations. The processed data can then be used to parameterize models for simulating magnetic and alloy configurations. Currently, GenMC_Preprocess only supports VASP input files for the DFT dataset.
 
 ---
 
