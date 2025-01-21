@@ -1,4 +1,4 @@
-root_dir: '/Users/tianyu/Desktop/Alloy/GenMC/GenMC_Preprocess/data_FeNiCr_old/5-33'   # the top directory of your vasp data
+root_dir: 'NiMnIn_Sample_Data'   # the top directory of your vasp data
 do_compile_data: True                             # Choose whether or not to compile data dataset to a single file
 write_data: 'data_mag'                            # Path and name of your output metadata file
 species: ['Ni', 'Mn', 'In']                       # Species in sequence as they appear in your POSCAR file

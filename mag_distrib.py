@@ -2,6 +2,8 @@ import os
 import json
 import copy
 import numpy as np
+import matplotlib as mpl
+from matplotlib import pyplot as plt
 
 
 def frac_to_cart(frac_coord, basis):
@@ -132,7 +134,7 @@ def read_pair(str_dict, target, pair, clust):
     return mag_list
 
 
-def find_mag_distrib(root_dir, output_dir, species):
+def find_mag_distrib(root_dir, output_dir, species, hist_bins=20):
     """
     get magnetic distribution of each species from the data set
     :param root_dir: the top directory of your vasp data
@@ -176,6 +178,17 @@ def find_mag_distrib(root_dir, output_dir, species):
                 for j in range(len(str_dict['Spec'])):
                     if str_dict['Spec'][j] == species[i]:
                         distrib_list[i].append(str_dict['Spin'][j])
+
+    for i in range(len(distrib_list)):
+        dist_i = np.array(distrib_list[i])
+        # plot histogram
+        plt.hist(dist_i, bins=hist_bins, color='blue', edgecolor='black', alpha=0.7)
+        plt.title('Magnetic Distribution of ' + species[i])
+        plt.xlabel('Magnetic Moment')
+        plt.ylabel('Frequency')
+        plt.savefig('mag_distrib_' + species[i] + '.png')
+        plt.close()
+
 
     with open(output_dir, 'w') as filehandler:
         json.dump(distrib_list, filehandler)

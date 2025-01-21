@@ -239,7 +239,7 @@ def compile_vasp(root_dir, output_dir, species, read_mag, use_spin_tol, spin_tol
                             print('Error: check the spin tolerance setting!')
             pos_list.sort(key=lambda x: species.index(x[0]))
             # start writing outputs
-            print(name)
+            # print(name)
             output.write("# ")
             for i in range(len(species)):
                 output.write(str(species[i]) + " ")
