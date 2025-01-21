@@ -1,18 +1,15 @@
 root_dir: '/Users/tianyu/Desktop/Alloy/GenMC/GenMC_Preprocess/data_FeNiCr_old/5-33'   # the top directory of your vasp data
-
-do_compile_data: True
-write_data: 'data_mag_5-33'                       # path and name of your output metadata file
-species: ['Fe', 'Ni', 'Cr']                       # species and sequence
-read_mag: True
-use_spin_tol: True                                # choose whether to use spin tolerance
-spin_tol: [[2,1], [0.4,0.2], [1.4,0.7]]           # spin tolerance here in the same sequence of species
-
-do_mag_distrib: False
+do_compile_data: True                             # Choose whether or not to compile data dataset to a single file
+write_data: 'data_mag'                            # Path and name of your output metadata file
+species: ['Ni', 'Mn', 'In']                       # Species in sequence as they appear in your POSCAR file
+read_mag: True                                    # Flag to read magnetic moment from OUTCAR
+use_spin_tol: True                                # Choose whether display spin as integers or total magnetic moment
+spin_tol: [[2,1], [0.4,0.2], [1.4,0.7]]           # Spin tolerance here in the same sequence of species
+do_mag_distrib: True                              # Choose whether or not to calculate magnetic moment distribution
 write_mag_distrib: 'mag_distrib'                  # path and name of your magnetic distribution output file
-
-do_mag_pair: False
+do_mag_pair: False                                # Choose whether or not to calculate magnetic pair distribution
 write_mag_pair: 'CrFe_1NN'                        # path and name of your magnetic pairs output file
-target: 'Cr'
-pair: 'Fe'
+target: 'Cr'                                      # Target species for pair distribution
+pair: 'Fe'                                        # Pair species for pair distribution
 clust: [[1.8, 1.8, 0.0],[-1.8, -1.8, 0.0],[-1.8, 1.8, 0.0],[1.8, -1.8, 0.0],[0.0, 1.8, 1.8],[0.0, -1.8, -1.8],
-[0.0, -1.8, 1.8],[0.0, 1.8, -1.8],[1.8, 0.0, 1.8],[-1.8, 0.0, -1.8],[1.8, 0.0, -1.8],[-1.8, 0.0, 1.8]]
+[0.0, -1.8, 1.8],[0.0, 1.8, -1.8],[1.8, 0.0, 1.8],[-1.8, 0.0, -1.8],[1.8, 0.0, -1.8],[-1.8, 0.0, 1.8]] # Clusters for pair distribution
