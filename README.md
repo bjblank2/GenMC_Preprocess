@@ -99,6 +99,6 @@ The general workflow for using GenMC_Preprocess involves the following steps:
 
 The first line lists the atomic species present in the dataset in the same order as in the POSCAR files. The second line lists the number of each atom of each species, the file path the data was found at, the DFT total energy in eV, and the lattice constants. The next three lines are the lattice vectors. The remaining lines show the atom index, spin/moment, and fractional coordinates of each atom. 
 
-
+Feel Free to try and run GenMC_Preprocess on the included sample data for NiMnIn. 
 
 
