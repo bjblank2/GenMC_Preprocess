@@ -20,7 +20,7 @@ The general workflow for using GenMC_Preprocess involves the following steps:
     - Any model created with GenMC-MA is only as good as its dataset. In order to ensure the best possible mode, the dataset should include a diverse set of atomic and magnetic configurations. It is recommended that, for each unique POSCAR file in a dataset should be initialized with as many symmetrically unique configurations of magnetic moments as is practical.
 
     - The directory structure of the dataset should be organized as follows:
-
+```plaintext
     |
     |_ Root Directory (Name)
 	|
