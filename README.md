@@ -9,7 +9,7 @@ GenMC_Preprocess is a component of the Generalized Monte Carlo Toolkit for Magne
 - **Collates DFT simulation results**: Automatically gathers results of DFT simulations into a single data file.
 - **Formats data for lattice models**: Transforms DFT outputs into a compact format suitable for lattice model parameterization
 - **Validates simulation results**: Identifies and flags incomplete or corrupt DFT results.
-- **Analyze magnetic moment distribution **: Finds the distribution of magnetic moments for each constituent atomic species.
+- **Analyze magnetic moment distribution**: Finds the distribution of magnetic moments for each constituent atomic species.
 
 ---
 
